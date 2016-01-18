@@ -1,8 +1,10 @@
 include("dane.txt")
 
+#wymagane biblioteki
 using Polynomials
 using Gtk.ShortNames
 
+#utworzenie obiektów
     win = @Window("Shamir",200,200) #okno
     f0 = @Frame("Podział")
     f1 = @Frame("krok 1")
@@ -56,6 +58,7 @@ using Gtk.ShortNames
     push!(h2,"Wielomian ma postać:")
     push!(h2,"")
     
+    #wypisanie wielomianu
     push!(d, k)
     ab = [d;a]
     f = Poly([ab])
