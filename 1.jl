@@ -3,9 +3,9 @@ function generatePrimeNumber(moreThen::Int64)
     #Liczba pierwsza musi być liczbą większa niż tajemnica,dlatego
     #zwiększam o jeden i sprawdzam czy jest pierwsza, do czasu az napotkana 
     #liczba jest liczba pierwsza
-        while !isprime(moreThen)
-            moreThen += 1
-        end
+    while !isprime(moreThen)
+         moreThen += 1
+    end
     
     return moreThen
 end
@@ -22,8 +22,8 @@ function generatePoints(needed::Int64, primeNumber::Int64,secret::Int64)
         x = rand(1:primeNumber -1)
          if !in(x,points)
             push!(points,x)
-        end
-    end
+	  end
+      end
     
     return points
    
@@ -33,20 +33,17 @@ function generateSecretPart(number::Int64, available::Int64, needed::Int64,coef:
     #Wyliczanie udziałów
     #accum jest udziałem, tak więc podstawiamy wyliczone rzeczy pod wielomian i wyliczamy udział
     #coef = tablica z współczynnikami
-        x = Int64
-        exp = Int64
-        c = Int64
-        accum = Int64
+ 
         shares = Int64[]
       
         for x=1:available
-             accum = coef[1]
+            accum = coef[1]
             for exp=2:needed
                 accum = (accum  + (coef[exp] * ((x^(exp-1) ) % prime) % prime)) % prime
             end 
       
-        push!(shares, accum)
-        accum = 0
+	    push!(shares, accum)
+	    accum = 0
         end
        
     return shares
@@ -83,10 +80,6 @@ function  makeFileForVisual(s::Int64,t::Int64,n::Int64,p::Int64,results::Array,p
 function sharingSecret(secret::Int64, avalible::Int64,needed::Int64)
     # Główna funkcja programu
     
-    p = Int64
-    point = Array
-    result = Array
-    
     #generowanie liczby pierwszej
     p = generatePrimeNumber(secret)
     println("PrimeNumber: ",p)
@@ -113,5 +106,5 @@ function sharingSecret(secret::Int64, avalible::Int64,needed::Int64)
     include("podzial.jl")
 end
 
-sharingSecret(2404123,6,3)
+sharingSecret(5246854,6,3)
 
