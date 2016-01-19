@@ -3,19 +3,13 @@ function joinSecretPart(shares::Array, points::Array, primeNumber::Int64)
     #Funkcja do odczytu tajemnicy 
     #Nic tylko podstawianie danych do wielomianu intetrpolacyjnego lagrange
     
-    count = Int64
-    formula = Int64
-    startposition = Int64
-    nextposition = Int64
-    value = Int64
-    numerator = Int64
-    denumerator = Int64
-	accum = Int64
+  
     accum = 0
     for formula=1:length(shares)
 
         numerator = 1
-		denominator = 1
+	denominator = 1
+	
         for count=1:length(shares)
         
            if formula == count 
@@ -27,7 +21,7 @@ function joinSecretPart(shares::Array, points::Array, primeNumber::Int64)
             numerator = (numerator * (-nextposition)) % primeNumber
             denominator = (denominator * (startposition - nextposition)) % primeNumber
      
-            end
+          end
         
         value = points[formula]  
         accum = (primeNumber + accum + (value * numerator *invmod(denominator,primeNumber))) % primeNumber
@@ -46,7 +40,7 @@ function  makeFileForVisual(points::Array,shares::Array,primeNumber::Int64)
     println(f,"p=$primeNumber")
        
     close(f)
-    end
+end
 
 
 function mainFunctionForJoinSecret(shares::Array, points::Array, primeNumber::Int64)
